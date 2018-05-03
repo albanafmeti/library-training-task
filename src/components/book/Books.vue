@@ -36,28 +36,8 @@
           </tbody>
         </table>
 
-        <nav aria-label="Page navigation example" class="mt-4">
-          <ul class="pagination">
-
-            <li class="page-item" :disabled="!previousPage">
-              <a class="page-link" href="#" @click.prevent="paginate(previousPage)">Previous</a>
-            </li>
-
-            <li class="page-item">
-              <a class="page-link" href="#" @click.prevent="paginate(previousPage)"
-                 v-if="previousPage">{{ previousPage }}</a>
-            </li>
-
-            <li class="page-item active"><a class="page-link" href="#">{{ currentPage }}</a></li>
-
-            <li class="page-item"><a class="page-link" href="#" @click.prevent="paginate(nextPage)" v-if="nextPage">{{
-              nextPage }}</a></li>
-
-            <li class="page-item" :disabled="!nextPage">
-              <a class="page-link" href="#" @click.prevent="paginate(nextPage)">Next</a>
-            </li>
-          </ul>
-        </nav>
+        <Pagination :current-page="currentPage" :per-page="perPage" :total="totalBooks"
+                    @paginate="paginate"></Pagination>
 
       </div>
 
@@ -69,10 +49,11 @@
 
 <script>
   import AddBook from "./AddBook";
+  import Pagination from "../pagination/Pagination";
 
   export default {
     name: "Books",
-    components: {AddBook},
+    components: {Pagination, AddBook},
     data: function () {
       return {
         currentPage: 1,
@@ -86,13 +67,6 @@
       totalBooks: function () {
         return this.$store.getters.totalBooks
       },
-      previousPage: function () {
-        return this.currentPage > 1 ? (this.currentPage - 1) : null;
-      },
-      nextPage: function () {
-        let lastPage = Math.ceil(this.totalBooks / this.perPage);
-        return lastPage > this.currentPage ? (this.currentPage + 1) : null;
-      }
     },
     methods: {
       paginate(page) {

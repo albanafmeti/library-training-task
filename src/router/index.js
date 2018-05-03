@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Books from '@/components/Books'
-import EditBook from '@/components/EditBook'
+import Books from '@/components/book/Books'
+import EditBook from '@/components/book/EditBook'
 
 Vue.use(Router);
 
