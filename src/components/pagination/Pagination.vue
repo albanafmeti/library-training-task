@@ -1,5 +1,5 @@
 <template>
-  <nav aria-label="Page navigation example" class="mt-4">
+  <nav aria-label="Page navigation example" class="mt-4" v-if="total > perPage">
     <ul class="pagination">
 
       <li class="page-item" :class="{ 'disabled': !previousPage }">

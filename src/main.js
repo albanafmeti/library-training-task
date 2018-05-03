@@ -7,6 +7,21 @@ import store from './store'
 
 Vue.config.productionTip = false;
 
+// Import toastr.
+window.toastr = require('toastr');
+toastr.options.progressBar = true;
+
+// IMport Vuejs Dialog.
+import VuejsDialog from "vuejs-dialog";
+
+Vue.use(VuejsDialog, {
+  html: true,
+  loader: true,
+  okText: 'Proceed',
+  cancelText: 'Cancel',
+  animation: 'fade'
+});
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

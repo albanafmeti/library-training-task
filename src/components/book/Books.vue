@@ -29,8 +29,12 @@
             <td>{{ book.author }}</td>
             <td>{{ book.creation_date}}</td>
             <td>
-              <a href="#" class="btn btn-outline-primary btn-sm" title="Edit"><i class="fa fa-pencil"></i></a>
-              <a href="#" class="btn btn-outline-danger btn-sm" title="Delete"><i class="fa fa-times"></i></a>
+              <router-link :to="'/book/' + book.id" class="btn btn-outline-primary btn-sm" title="Edit"><i
+                class="fa fa-pencil"></i></router-link>
+              <a href="#" class="btn btn-outline-danger btn-sm" title="Delete"
+                 @click.prevent="deleteBookConfirmation(book)">
+                <i class="fa fa-times"></i>
+              </a>
             </td>
           </tr>
           </tbody>
@@ -50,6 +54,7 @@
 <script>
   import AddBook from "./AddBook";
   import Pagination from "../pagination/Pagination";
+  import {mapActions} from 'vuex';
 
   export default {
     name: "Books",
@@ -57,7 +62,7 @@
     data: function () {
       return {
         currentPage: 1,
-        perPage: 3
+        perPage: 5
       }
     },
     computed: {
@@ -69,6 +74,21 @@
       },
     },
     methods: {
+      deleteBookConfirmation(book) {
+        let _this = this;
+        this.$dialog.confirm(`<p class='text-center m-0'>Are you sure you want to delete this book?</p>`)
+          .then(function (dialog) {
+
+            setTimeout(() => {
+              _this.deleteBook(book);
+
+              toastr.success("Book has been deleted successfully.");
+              dialog.close();
+            }, 1000);
+
+          });
+      },
+      ...mapActions(['deleteBook']),
       paginate(page) {
         if (page) {
           this.currentPage = page;
