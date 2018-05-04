@@ -75,6 +75,12 @@
         perPage: 5
       }
     },
+    watch: {
+      searchText: function (newValue) {
+        // Reset currentPage while searching.
+        this.currentPage = 1;
+      }
+    },
     computed: {
       books: function () {
         return this.$store.getters.getBooks(this.currentPage, this.perPage, this.searchText)
