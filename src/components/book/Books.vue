@@ -100,7 +100,7 @@
 
               toastr.success("Book has been deleted successfully.");
               dialog.close();
-            }, 1000);
+            }, 700);
 
           });
       },

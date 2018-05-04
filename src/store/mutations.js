@@ -6,8 +6,13 @@ export const mutations = {
 
     // Generate the new book ID.
     let length = state.books.length;
-    let {[length - 1]: lastBook} = state.books;
-    book.id = lastBook.id + 1;
+
+    if (length) {
+      let {[length - 1]: lastBook} = state.books;
+      book.id = lastBook.id + 1;
+    } else {
+      book.id = 1;
+    }
 
     // Current creation date.
     book.creation_date = moment().format('YYYY-MM-DD');
