@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div class="card">
+
+    <div class="card mb-5">
       <div class="card-header">Books
 
         <button type="button" class="btn btn-sm btn-outline-primary pull-right" data-toggle="modal"
@@ -9,6 +10,10 @@
         </button>
       </div>
       <div class="card-body">
+
+
+        <input type="text" class="form-control mb-2" placeholder="Search by title"
+               v-model="searchText"/>
 
         <table class="table table-striped table-hover">
           <thead>
@@ -29,7 +34,8 @@
             <td>{{ book.author }}</td>
             <td>{{ book.creation_date}}</td>
             <td>
-              <router-link :to="'/book/' + book.id" class="btn btn-outline-primary btn-sm" title="Edit"><i
+              <router-link :to="{ name: 'edit-book', params: { id: book.id }}" class="btn btn-outline-primary btn-sm"
+                           title="Edit"><i
                 class="fa fa-pencil"></i></router-link>
               <a href="#" class="btn btn-outline-danger btn-sm" title="Delete"
                  @click.prevent="deleteBookConfirmation(book)">
@@ -39,6 +45,8 @@
           </tr>
           </tbody>
         </table>
+
+        <p class="text-center" v-if="totalBooks === 0">No results</p>
 
         <Pagination :current-page="currentPage" :per-page="perPage" :total="totalBooks"
                     @paginate="paginate"></Pagination>
@@ -61,16 +69,18 @@
     components: {Pagination, AddBook},
     data: function () {
       return {
+        searchText: null,
+
         currentPage: 1,
         perPage: 5
       }
     },
     computed: {
       books: function () {
-        return this.$store.getters.getBooks(this.currentPage, this.perPage)
+        return this.$store.getters.getBooks(this.currentPage, this.perPage, this.searchText)
       },
       totalBooks: function () {
-        return this.$store.getters.totalBooks
+        return this.$store.getters.totalBooks(this.searchText);
       },
     },
     methods: {
@@ -89,6 +99,7 @@
           });
       },
       ...mapActions(['deleteBook']),
+
       paginate(page) {
         if (page) {
           this.currentPage = page;

@@ -6,7 +6,9 @@
         <div class="row">
           <div class="col">
 
-            <h1 class="h1 my-3 app-title">Library</h1>
+            <router-link :to="{ name: 'books' }" class="app-title-link">
+              <h1 class="h1 my-3 app-title">Library</h1>
+            </router-link>
             <hr/>
 
             <router-view/>
@@ -44,5 +46,10 @@
 
   .app-title {
     font-family: initial;
+  }
+
+  .app-title-link, .app-title-link:hover {
+    text-decoration: none;
+    color: #000;
   }
 </style>

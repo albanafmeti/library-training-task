@@ -7,17 +7,20 @@ import store from './store'
 
 Vue.config.productionTip = false;
 
+// Import moment.js
+window.moment = require('moment');
+
 // Import toastr.
 window.toastr = require('toastr');
 toastr.options.progressBar = true;
 
-// IMport Vuejs Dialog.
+// Import Vuejs Dialog.
 import VuejsDialog from "vuejs-dialog";
 
 Vue.use(VuejsDialog, {
   html: true,
   loader: true,
-  okText: 'Proceed',
+  okText: 'Delete',
   cancelText: 'Cancel',
   animation: 'fade'
 });

@@ -15,28 +15,27 @@
           <form>
             <div class="form-group">
               <label>ISBN</label>
-              <input type="text" class="form-control" placeholder="Enter ISBN">
+              <input type="text" class="form-control" placeholder="Enter ISBN" v-model="bookItem.isbn">
             </div>
             <div class="form-group">
               <label>Title</label>
-              <input type="text" class="form-control" placeholder="Enter Title">
+              <input type="text" class="form-control" placeholder="Enter Title" v-model="bookItem.title">
             </div>
+
             <div class="form-group">
               <label>Author</label>
-              <select class="form-control">
+              <select class="form-control" v-model="bookItem.author">
                 <option v-for="author in authors" :value="author">{{ author }}</option>
               </select>
             </div>
 
             <div class="form-group">
               <label>Description</label>
-              <textarea class="form-control" rows="3" placeholder="Enter Description"></textarea>
+              <textarea class="form-control" rows="3" placeholder="Enter Description"
+                        v-model="bookItem.description"></textarea>
             </div>
-
-            <hr/>
             <p class="text-right">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Update</button>
+              <button type="submit" class="btn btn-primary" @click.prevent="add">Add</button>
             </p>
           </form>
 
@@ -51,6 +50,16 @@
 
   export default {
     name: "AddBook",
+    data: function () {
+      return {
+        bookItem: {
+          isbn: null,
+          title: null,
+          author: null,
+          description: null,
+        }
+      }
+    },
     computed: {
       ...mapGetters({
         'authors': 'getAuthors'
@@ -58,12 +67,47 @@
     },
     methods: {
       ...mapActions([
-        'addBook', // map `this.addBook()` to `this.$store.dispatch('addBook')`
+        'addBook',
       ]),
+
+      add() {
+
+        try {
+          this.validateBook();
+        } catch (exception) {
+          return toastr.error(exception);
+        }
+
+        this.addBook(this.bookItem);
+
+        toastr.success('Book has been added successfully.');
+        $('#add-book-modal').modal('hide');
+
+        // Reset bookItem
+        this.bookItem = {
+          isbn: null,
+          title: null,
+          author: null,
+          description: null,
+        }
+      },
+
+      validateBook() {
+        if (this.bookItem.isbn === ""
+          || this.bookItem.isbn === null) {
+          throw "ISBN is required.";
+        } else if (this.bookItem.title === ""
+          || this.bookItem.title === null) {
+          throw "Title is required.";
+        } else if (this.bookItem.author === ""
+          || this.bookItem.author === null) {
+          throw "Author is required.";
+        } else if (this.bookItem.creation_date === ""
+          || this.bookItem.creation_date === null) {
+          throw "Creation date is required.";
+        }
+      }
     }
   }
 </script>
 
-<style scoped>
-
-</style>
