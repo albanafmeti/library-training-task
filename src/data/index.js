@@ -7,7 +7,6 @@ export const BOOKS_LIST = [
     description: "Here is the description of the book.",
     creation_date: "2018-05-02"
   },
-/*
   {
     id: 2,
     isbn: "10SZ12M101",
@@ -40,7 +39,6 @@ export const BOOKS_LIST = [
     description: "Here is the description of the book.",
     creation_date: "2018-04-12"
   },
-* */
 ];
 
 export const AUTHORS_LIST = [
