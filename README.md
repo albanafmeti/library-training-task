@@ -1,7 +1,7 @@
 ## Vue JS (2.0) Test Task
 
 The goal of this task is to implement a web application that gives the user the ability to see the available books in the library, add new ones and edit the existing books. All data should be stored in browser memory. There should not be any implemented server side code. When app starts for the first time it should be filled with 5 mockup books and 5 authors. Developer should assume that this is a small part of a big application and create several independent components that can be reused. For example, having “view/edit book” component separated from the books list is a good idea because it will give an ability to reuse the same component in other application areas. 
-The application is required to use  official router library (https://router.vuejs.org/en/installation.html)[https://router.vuejs.org/en/installation.html] and state management solution [https://vuex.vuejs.org/en/installation.html](https://vuex.vuejs.org/en/installation.html) 
+The application is required to use  official router library [https://router.vuejs.org/en/installation.html](https://router.vuejs.org/en/installation.html) and state management solution [https://vuex.vuejs.org/en/installation.html](https://vuex.vuejs.org/en/installation.html) 
 
 Book in our application should have these properties
 **ID** 			– 	Book unique number
