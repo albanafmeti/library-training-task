@@ -6,6 +6,8 @@
         <a class="page-link" href="#" @click.prevent="paginate(previousPage)">Previous</a>
       </li>
 
+      <li class="page-item"><a class="page-link" v-if="hiddenOnLeft">...</a></li>
+
       <li class="page-item">
         <a class="page-link" href="#" @click.prevent="paginate(previousPage)"
            v-if="previousPage">{{ previousPage }}</a>
@@ -15,6 +17,8 @@
 
       <li class="page-item"><a class="page-link" href="#" @click.prevent="paginate(nextPage)" v-if="nextPage">{{
         nextPage }}</a></li>
+
+      <li class="page-item"><a class="page-link" v-if="hiddenOnRight">...</a></li>
 
       <li class="page-item" :class="{ 'disabled': !nextPage }">
         <a class="page-link" href="#" @click.prevent="paginate(nextPage)">Next</a>
@@ -46,6 +50,14 @@
       nextPage: function () {
         let lastPage = Math.ceil(this.total / this.perPage);
         return lastPage > this.currentPage ? (this.currentPage + 1) : null;
+      },
+
+      hiddenOnLeft: function () {
+        return this.currentPage > 2;
+      },
+      hiddenOnRight: function () {
+        let lastPage = Math.ceil(this.total / this.perPage);
+        return (lastPage - this.currentPage) > 1;
       }
     },
     methods: {
