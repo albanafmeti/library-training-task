@@ -6,7 +6,7 @@
         <div class="row">
           <div class="col">
 
-            <h1 class="h1 my-3">Library</h1>
+            <h1 class="h1 my-3 app-title">Library</h1>
             <hr/>
 
             <router-view/>
@@ -40,5 +40,9 @@
 
   .main-content {
     min-height: 500px;
+  }
+
+  .app-title {
+    font-family: initial;
   }
 </style>

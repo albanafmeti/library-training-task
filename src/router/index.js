@@ -10,12 +10,12 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Books',
+      name: 'books',
       component: Books
     },
     {
       path: '/book/:id',
-      name: 'EditBook',
+      name: 'edit-book',
       component: EditBook
     }
   ]

@@ -6,6 +6,12 @@ export const getters = {
       return state.books.slice(page * perPage, (page + 1) * perPage);
     };
   },
+  getBook: (state) => {
+
+    return (bookId) => {
+      return state.books.find(obj => obj.id === bookId)
+    };
+  },
   totalBooks: (state, getters) => {
     return getters.getBooks().length;
   },
