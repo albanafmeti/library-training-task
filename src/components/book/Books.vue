@@ -72,7 +72,7 @@
         searchText: null,
 
         currentPage: 1,
-        perPage: 3
+        perPage: 5
       }
     },
     watch: {
