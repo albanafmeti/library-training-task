@@ -100,6 +100,12 @@
 
               toastr.success("Book has been deleted successfully.");
               dialog.close();
+
+              // If current page has no itesm, update currentPage to 1.
+              if (_this.books.length === 0) {
+                _this.currentPage = 1;
+              }
+
             }, 700);
 
           });
